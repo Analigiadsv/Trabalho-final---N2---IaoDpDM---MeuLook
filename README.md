@@ -2,7 +2,7 @@
 
 Guarda-roupa virtual que permite cadastrar peças de roupa e receber sugestões de looks por regras de combinação.
 
-> Projeto acadêmico (Trabalho N2) da disciplina **Introdução ao Desenvolvimento para Dispositivos Móveis** — Centro Universitário Afya Ji-Paraná. Professor: Romário Vitorino Ferreira. Finalidade exclusivamente acadêmica; os dados são fictícios.
+> Projeto acadêmico (Trabalho N2) da disciplina **Introdução ao Desenvolvimento para Dispositivos Móveis** - Centro Universitário Afya Ji-Paraná. Professor: Romário Vitorino Ferreira. Finalidade exclusivamente acadêmica; os dados são fictícios.
 
 ## Integrantes e divisão preliminar
 
