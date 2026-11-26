@@ -1,45 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MeuLook</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header class="topo">
-      <h1>MeuLook</h1>
-      <span id="status-conexao" class="status">Verificando...</span>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d28d9">
+  <meta name="description" content="MeuLook: organize seu guarda-roupa e receba sugestões de looks, mesmo offline.">
+  <title>MeuLook</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%97%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="pular" href="#principal">Pular para o conteúdo</a>
 
-    <main>
-      <section id="inicio" class="tela">
-        <h2>Início</h2>
-        <p>Organize seu guarda-roupa e receba sugestões de looks.</p>
-      </section>
-      <section id="cadastrar" class="tela" hidden>
-        <h2>Cadastrar peça</h2>
-        <p>O formulário será implementado na próxima etapa.</p>
-      </section>
-      <section id="guardaroupa" class="tela" hidden>
-        <h2>Guarda-roupa e looks</h2>
-        <p>
-          A listagem e a sugestão de looks serão implementadas na próxima etapa.
-        </p>
-      </section>
-      <section id="sobre" class="tela" hidden>
-        <h2>Sobre</h2>
-        <p>Projeto acadêmico com dados fictícios.</p>
-      </section>
-    </main>
+  <header class="topo">
+    <h1>👗 MeuLook</h1>
+    <span id="indicador-conexao" class="indicador" role="status" aria-live="polite">Verificando…</span>
+  </header>
 
-    <nav class="menu" aria-label="Navegação principal">
-      <a href="#inicio">Início</a>
-      <a href="#cadastrar">Cadastrar</a>
-      <a href="#guardaroupa">Guarda-roupa</a>
-      <a href="#sobre">Sobre</a>
-    </nav>
+  <main id="principal" tabindex="-1">
 
-    <script src="js/app.js"></script>
-  </body>
+    <!-- TELA 1: INÍCIO -->
+    <section class="tela" id="tela-inicio" data-rota="inicio" aria-labelledby="t-inicio">
+      <h2 id="t-inicio">Início</h2>
+      <p>Cadastre suas peças e receba sugestões de looks de acordo com a ocasião e o clima, mesmo sem internet.</p>
+      <div class="resumo">
+        <div class="card"><strong id="total-pecas">0</strong><span>peças</span></div>
+        <div class="card"><strong id="total-looks">0</strong><span>looks salvos</span></div>
+      </div>
+      <a class="botao" href="#/cadastrar">Cadastrar peça</a>
+      <p id="status-dados" class="msg" role="status" hidden></p>
+      <p id="status-offline" class="nota" role="status"></p>
+    </section>
+
+    <!-- TELA 2: CADASTRAR PEÇA -->
+    <section class="tela" id="tela-cadastrar" data-rota="cadastrar" aria-labelledby="t-cadastrar" hidden>
+      <h2 id="t-cadastrar">Cadastrar peça</h2>
+      <p class="nota">Campos com * são obrigatórios.</p>
+      <form id="form-peca" novalidate>
+        <div class="campo">
+          <label for="nome">Nome da peça *</label>
+          <input id="nome" name="nome" type="text" maxlength="40" autocomplete="off" aria-describedby="erro-nome">
+          <span class="erro" id="erro-nome"></span>
+        </div>
+        <div class="campo">
+          <label for="categoria">Categoria *</label>
+          <select id="categoria" name="categoria" aria-describedby="erro-categoria"></select>
+          <span class="erro" id="erro-categoria"></span>
+        </div>
+        <div class="campo">
+          <label for="cor">Cor *</label>
+          <select id="cor" name="cor" aria-describedby="erro-cor"></select>
+          <span class="erro" id="erro-cor"></span>
+        </div>
+        <div class="campo">
+          <label for="estacao">Estação</label>
+          <select id="estacao" name="estacao" aria-describedby="erro-estacao"></select>
+          <span class="erro" id="erro-estacao"></span>
+        </div>
+        <div class="campo">
+          <label for="ocasiao">Ocasião</label>
+          <select id="ocasiao" name="ocasiao" aria-describedby="erro-ocasiao"></select>
+          <span class="erro" id="erro-ocasiao"></span>
+        </div>
+        <button type="submit" class="botao">Salvar peça</button>
+        <p id="msg-form" class="msg" role="status" hidden></p>
+      </form>
+    </section>
+
+    <!-- TELA 3: GUARDA-ROUPA E LOOKS -->
+    <section class="tela" id="tela-guarda-roupa" data-rota="guarda-roupa" aria-labelledby="t-guarda" hidden>
+      <h2 id="t-guarda">Guarda-roupa e looks</h2>
+
+      <div class="campo">
+        <label for="filtro-categoria">Filtrar por categoria</label>
+        <select id="filtro-categoria"></select>
+      </div>
+      <p id="msg-lista" class="msg" role="status" hidden></p>
+      <ul id="lista-pecas" class="lista"></ul>
+
+      <h3>Sugerir look</h3>
+      <div class="linha">
+        <div class="campo">
+          <label for="look-ocasiao">Ocasião</label>
+          <select id="look-ocasiao"></select>
+        </div>
+        <div class="campo">
+          <label for="look-clima">Clima</label>
+          <select id="look-clima"></select>
+        </div>
+      </div>
+      <button type="button" id="btn-sugerir" class="botao">Sugerir look</button>
+      <p id="msg-looks" class="msg" role="status" hidden></p>
+      <ul id="resultado-looks" class="lista"></ul>
+      <div id="area-manual" hidden>
+        <label for="texto-manual">Copie o texto abaixo:</label>
+        <textarea id="texto-manual" rows="4" readonly></textarea>
+      </div>
+
+      <h3>Looks salvos</h3>
+      <ul id="looks-salvos" class="lista"></ul>
+    </section>
+
+    <!-- TELA 4: SOBRE -->
+    <section class="tela" id="tela-sobre" data-rota="sobre" aria-labelledby="t-sobre" hidden>
+      <h2 id="t-sobre">Sobre o projeto</h2>
+      <p><strong>Objetivo:</strong> aplicação Web responsiva e utilizável offline para cadastrar peças de roupa e sugerir looks com base em regras de combinação.</p>
+      <h3>Integrantes</h3>
+      <ul>
+        <li>Ana Lígia de Souza Vale — @Analigiadsv</li>
+        <li>Bruna Michelly Dias Martins — @b-diaxs</li>
+        <li>Camila Brozeguine Dernei — @CamilaBrozeguine</li>
+        <li>Fernanda Santana Leandro — @fernandasl1010-jpg</li>
+      </ul>
+      <h3>Tecnologias</h3>
+      <p>HTML, CSS e JavaScript (módulos ES), localStorage, fetch, Web Share API, Service Worker e Cache API.</p>
+      <h3>Créditos</h3>
+      <p>As peças são representadas por emojis Unicode. Não há imagens ou ícones externos.</p>
+      <p class="aviso">Projeto de finalidade exclusivamente acadêmica (Introdução ao Desenvolvimento para Dispositivos Móveis, Centro Universitário Afya Ji-Paraná). Todos os dados ficam apenas no seu navegador.</p>
+    </section>
+  </main>
+
+  <nav class="menu" aria-label="Principal">
+    <a href="#/inicio" data-rota="inicio"><span aria-hidden="true">🏠</span>Início</a>
+    <a href="#/cadastrar" data-rota="cadastrar"><span aria-hidden="true">➕</span>Cadastrar</a>
+    <a href="#/guarda-roupa" data-rota="guarda-roupa"><span aria-hidden="true">👚</span>Guarda-roupa</a>
+    <a href="#/sobre" data-rota="sobre"><span aria-hidden="true">ℹ️</span>Sobre</a>
+  </nav>
+
+  <script type="module" src="js/app.js"></script>
+</body>
 </html>
