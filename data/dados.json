@@ -1,0 +1,56 @@
+{
+  "categorias": [
+    { "id": "camiseta", "nome": "Camiseta", "emoji": "👕", "grupo": "topo" },
+    { "id": "camisa", "nome": "Camisa", "emoji": "👔", "grupo": "topo" },
+    { "id": "blusa", "nome": "Blusa", "emoji": "👚", "grupo": "topo" },
+    { "id": "calca", "nome": "Calça", "emoji": "👖", "grupo": "base" },
+    { "id": "shorts", "nome": "Shorts/Saia", "emoji": "🩳", "grupo": "base" },
+    { "id": "vestido", "nome": "Vestido", "emoji": "👗", "grupo": "corpo_inteiro" },
+    { "id": "tenis", "nome": "Tênis", "emoji": "👟", "grupo": "calcado" },
+    { "id": "sandalia", "nome": "Sandália", "emoji": "🩴", "grupo": "calcado" },
+    { "id": "bota", "nome": "Bota", "emoji": "🥾", "grupo": "calcado" },
+    { "id": "casaco", "nome": "Casaco", "emoji": "🧥", "grupo": "agasalho" }
+  ],
+  "cores": [
+    { "id": "preto", "nome": "Preto" },
+    { "id": "branco", "nome": "Branco" },
+    { "id": "cinza", "nome": "Cinza" },
+    { "id": "bege", "nome": "Bege" },
+    { "id": "azul", "nome": "Azul" },
+    { "id": "vermelho", "nome": "Vermelho" },
+    { "id": "verde", "nome": "Verde" },
+    { "id": "amarelo", "nome": "Amarelo" },
+    { "id": "rosa", "nome": "Rosa" },
+    { "id": "marrom", "nome": "Marrom" }
+  ],
+  "estacoes": [
+    { "id": "todas", "nome": "Todas" },
+    { "id": "verao", "nome": "Verão" },
+    { "id": "outono", "nome": "Outono" },
+    { "id": "inverno", "nome": "Inverno" },
+    { "id": "primavera", "nome": "Primavera" }
+  ],
+  "ocasioes": [
+    { "id": "qualquer", "nome": "Qualquer" },
+    { "id": "casual", "nome": "Casual" },
+    { "id": "faculdade", "nome": "Faculdade" },
+    { "id": "trabalho", "nome": "Trabalho" },
+    { "id": "festa", "nome": "Festa" },
+    { "id": "esporte", "nome": "Esporte" }
+  ],
+  "climas": [
+    { "id": "calor", "nome": "Calor", "estacoes": ["verao", "primavera"], "agasalho": false },
+    { "id": "ameno", "nome": "Ameno", "estacoes": ["primavera", "outono"], "agasalho": false },
+    { "id": "frio", "nome": "Frio", "estacoes": ["inverno", "outono"], "agasalho": true }
+  ],
+  "regras": {
+    "neutras": ["preto", "branco", "cinza", "bege"],
+    "combinam": [
+      ["azul", "marrom"], ["azul", "amarelo"], ["azul", "rosa"], ["verde", "marrom"],
+      ["verde", "rosa"], ["vermelho", "azul"], ["amarelo", "marrom"]
+    ],
+    "evitar": [
+      ["vermelho", "rosa"], ["vermelho", "verde"], ["amarelo", "rosa"], ["verde", "azul"]
+    ]
+  }
+}
