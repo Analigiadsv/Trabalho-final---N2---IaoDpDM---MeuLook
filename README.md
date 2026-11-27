@@ -86,4 +86,3 @@ Veja `docs/roteiro-testes.md`. As capturas ficam em `docs/evidencias/`.
 ## Links
 
 - Relatório: _https://1drv.ms/w/c/70ff6192f9510b20/IQAkuRUS-KNQQLrCFUYo1ULYAT-hwFP8aFFQHHONA4Ezu2k?e=HnmyIg_
-- Vídeo: _link(ainda vai inserir)_
